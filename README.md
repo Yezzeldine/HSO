@@ -1,2 +1,2 @@
 # HSO
-High School Outreach Tool
+MIST High School Outreach Tool
