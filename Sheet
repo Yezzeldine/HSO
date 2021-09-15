@@ -23,6 +23,8 @@ For displaying the counties for any given state selected:
   "
 )
 
+//This piece
+
 For coverting MapChart Active Juristiction Synax into Simple County Format:
 =TRANSPOSE(
   SPLIT(
