@@ -1,1 +1,103 @@
-https://docs.google.com/spreadsheets/d/1l7ockuL_FUNiFmhHWvYEHOj7m5qMSiwax0j7d24FYOc/edit#gid=1882760124
+Google Sheet can be accessed here: https://docs.google.com/spreadsheets/d/1l7ockuL_FUNiFmhHWvYEHOj7m5qMSiwax0j7d24FYOc/edit#gid=1882760124
+
+Some reference code:
+
+For displaying the counties for any given state selected:
+=QUERY(
+  B2:BB,
+  "select 
+    "&
+      SUBSTITUTE(
+        ADDRESS(
+          1,
+          MATCH(
+            'High School Finder'!A1,
+            B2:BB2,
+            0
+          )+1,
+          4
+        ),
+        1,""
+      )
+    &"
+  "
+)
+
+For coverting MapChart Active Juristiction Synax into Simple County Format:
+=TRANSPOSE(
+  SPLIT(
+    LEFT(
+      RIGHT(
+        SUBSTITUTE(
+          SUBSTITUTE(
+            A28,
+            "__",
+            ", "
+          ),
+          "_",
+          " "
+        ),
+        LEN(
+          A28
+        )-1
+      ),
+      LEN(
+        A28
+      )-2
+    ),
+    """,
+    """,
+    FALSE
+  )
+)
+
+For Filtering Federal School Data based on Selected State and County:
+=QUERY(
+  'Public Schools Juristiction'!A1:I,
+  "select * where (
+    G > 0 or G = -999
+  ) 
+  and (
+    I < 13 and I > 8
+  ) 
+  and (
+    not (
+      F contains 'Continuation' or F contains 'Juve'
+    )
+  ) 
+  "&
+    IF(
+      A1="",
+      "",
+      "and A = '"&A1&"'"
+    )
+  &" 
+  "&
+    IF(
+      B1="",
+      "",
+      "and B = '"&B1&"'"
+    )
+  &" 
+  order by H"
+)
+
+Simple Query to populate research tracker:
+=QUERY(
+  'High School Finder'!A2:I28788,
+  "select B,F"
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
