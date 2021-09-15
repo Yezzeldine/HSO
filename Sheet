@@ -87,17 +87,3 @@ Simple Query to populate research tracker:
   'High School Finder'!A2:I28788,
   "select B,F"
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
