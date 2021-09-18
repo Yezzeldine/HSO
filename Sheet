@@ -54,32 +54,26 @@ For coverting MapChart Active Juristiction Synax into Simple County Format:
 For Filtering Federal School Data based on Selected State and County:
 =QUERY(
   'Public Schools Juristiction'!A1:I,
-  "select * where (
-    G > 0 or G = -999
-  ) 
-  and (
-    I < 13 and I > 8
-  ) 
-  and (
-    not (
-      F contains 'Continuation' or F contains 'Juve'
-    )
-  ) 
-  "&
-    IF(
-      A1="",
-      "",
-      "and A = '"&A1&"'"
-    )
-  &" 
-  "&
-    IF(
-      B1="",
-      "",
-      "and B = '"&B1&"'"
-    )
-  &" 
-  order by H"
+  "select * where 
+    (G > 0 or G = -999) and 
+    (I < 13 and I > 8) and 
+    (not (
+      F contains 'CONTINUATION' or 
+      F contains 'JUVE' or 
+      F contains 'ALTERNATIVE' or 
+      F contains 'DETENTION' or 
+      F contains 'SPECIAL' or 
+      F contains 'HOSP' or
+      F contains 'ADULT' or
+      F contains 'TRANSITION' or
+      F contains 'INDEPENDENT' or
+      F contains 'VIRTUAL'
+      )
+    ) 
+    "&IF(A1="","","and A = '"&A1&"'")&" 
+    "&IF(B1="","","and B = '"&B1&"'")&" 
+    order by G desc
+  "
 )
 
 Simple Query to populate research tracker:
